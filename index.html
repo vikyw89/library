@@ -12,23 +12,28 @@
         Library
     </header>
     <main>
-        <form class="add-container" id="form1">
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title" autofocus placeholder="title" required>
-            <label for="author">Author</label>
-            <input type="text" name="author" id="author" placeholder="author" required>
-            <label for="pages">Pages</label>
-            <input type="number" name="pages" id="pages" placeholder="pages" required>
-            <div class="add">
-                <!-- <label for="status">Status</label>
-                <select name="status" id="status">
-                    <option value="read">read</option>
-                    <option value="unread">unread</option>
-                </select> -->
-                <button class="add-button" type="submit" form="form1">Add to Library</button>
+        <div>
+            <div class="search-container">
+                <label for="search-title">Search Title</label>
+                <input type="search" class="search-title" placeholder="search title">
             </div>
-            
-        </form>
+            <form class="add-container" id="form1">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" autofocus placeholder="title" required>
+                <label for="author">Author</label>
+                <input type="text" name="author" id="author" placeholder="author" required>
+                <label for="pages">Pages</label>
+                <input type="number" name="pages" id="pages" placeholder="pages" required>
+                <div class="add">
+                    <!-- <label for="status">Status</label>
+                    <select name="status" id="status">
+                        <option value="read">read</option>
+                        <option value="unread">unread</option>
+                    </select> -->
+                    <button class="add-button" type="submit" form="form1">Add to Library</button>
+                </div>
+            </form>
+        </div>
         <div class="library-container">
         </div>
     </main>

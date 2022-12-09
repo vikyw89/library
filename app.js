@@ -1,11 +1,13 @@
-let myLibrary = JSON.parse(localStorage.getItem('myLibrary')) ?? [
-    {
+let myLibrary = localStorage.getItem('myLibrary') === undefined
+    ? [{
         title: 'Harry Potter',
         author: 'J.K. Rowling',
         pages: '200',
         status: 'read'
-    },
-];
+    }]
+    : JSON.parse(localStorage.getItem('myLibrary'))
+
+console.log(myLibrary)
 
 const libraryContainer = document.querySelector('.library-container')
 
@@ -24,7 +26,7 @@ const formHandler = (e)=> {
     e.preventDefault()
     const {title, author, pages, status} = Object.fromEntries(new FormData(e.target))
     addBookToLibrary(title, author, pages, status ?? 'read')
-    libraryDisplay()
+    libraryDisplay(myLibrary)
 }
 
 const cardButtonHandler = (e) => {
@@ -35,12 +37,12 @@ const cardButtonHandler = (e) => {
     }
 }
 
-const libraryDisplay = ()=> {
+const libraryDisplay = (arg)=> {
     libraryContainer.innerHTML = null
-    for (let index in myLibrary) {
+    for (let index in arg) {
         const newCard = document.createElement('div')
         newCard.classList.add('library-card')
-        for (let [key, value] of Object.entries(myLibrary[index])) {
+        for (let [key, value] of Object.entries(arg[index])) {
             if (key != 'status') {
                 const entry = document.createElement('div')
                 entry.textContent = `${value}`
@@ -64,12 +66,17 @@ const libraryDisplay = ()=> {
         newCard.appendChild(cardDeleteButton)
         libraryContainer.appendChild(newCard)
     }
-    syncLocalStorage()
+    syncLocalStorage(myLibrary)
 }
 
 const cardDeleteButtonHandler = (e) => {
     myLibrary.splice(e.target.value, 1)
-    libraryDisplay()
+    libraryDisplay(myLibrary)
+}
+
+const searchTitleHandler = (e) => {
+    const filteredLibrary = myLibrary.filter(element => element.title.toLowerCase().match(e.target.value.toLowerCase()))
+    libraryDisplay(filteredLibrary)
 }
 
 const cardButton = document.querySelectorAll('.library-card > .status')
@@ -85,8 +92,11 @@ cardDeleteButton.forEach((element)=> {
 const form = document.querySelector('#form1')
 form.addEventListener('submit', formHandler)
 
-function syncLocalStorage() {
-    localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+const searchTitle = document.querySelector('.search-title')
+searchTitle.addEventListener('input', searchTitleHandler)
+
+const syncLocalStorage = (arg) => {
+    localStorage.setItem("myLibrary", JSON.stringify(arg));
 }
 
-libraryDisplay()
+libraryDisplay(myLibrary)
