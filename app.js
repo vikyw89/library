@@ -1,4 +1,4 @@
-let myLibrary = localStorage.getItem('myLibrary') === undefined
+let myLibrary = !localStorage.getItem('myLibrary')
     ? [{
         title: 'Harry Potter',
         author: 'J.K. Rowling',
