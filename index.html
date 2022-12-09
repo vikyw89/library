@@ -12,24 +12,24 @@
         Library
     </header>
     <main>
-        <form class="add-container" action="" method="">
+        <form class="add-container" id="form1">
             <label for="title">Title</label>
-            <input type="text" name="title" id="title" autofocus placeholder="title"><br>
+            <input type="text" name="title" id="title" autofocus placeholder="title" required>
             <label for="author">Author</label>
-            <input type="text" name="author" id="author" placeholder="author"><br>
+            <input type="text" name="author" id="author" placeholder="author" required>
             <label for="pages">Pages</label>
-            <input type="number" name="pages" id="pages" placeholder="pages"><br>
-            <label for="read">Read</label>
-            <input type="checkbox" name="read" id="read"><br>
-            <button>Add to Library</button>
+            <input type="number" name="pages" id="pages" placeholder="pages" required>
+            <div class="add">
+                <!-- <label for="status">Status</label>
+                <select name="status" id="status">
+                    <option value="read">read</option>
+                    <option value="unread">unread</option>
+                </select> -->
+                <button class="add-button" type="submit" form="form1">Add to Library</button>
+            </div>
+            
         </form>
         <div class="library-container">
-            <div class="library-card">
-                Card1
-            </div>
-            <div class="library-card">
-                Card1
-            </div>
         </div>
     </main>
     <footer>
